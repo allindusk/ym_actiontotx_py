@@ -14,10 +14,14 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.7
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: "安装依赖 serverless工具"
         run: |
-          sudo curl -o- -L https://slss.io/install | bash
-          serverless -v
+          sudo npm install serverless -g
+          serverless -v;node -v;npm -v
           pip install -r ./requirements.txt
       - name: "运行下载代码脚本"
         run: |
