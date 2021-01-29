@@ -31,8 +31,8 @@ jobs:
       #     ls -a
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
-          if [ $XMLY_SPEED_COOKIE ]; then sed -i "s/region:.*$/region: $XMLY_SPEED_COOKIE/g" serverless.yml; fi;
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
+          if [ $XMLY_SPEED_COOKIE ]; then sed -i "/variables/a\      XMLY_SPEED_COOKIE: $XMLY_SPEED_COOKIE" serverless.yml; fi;
           if [ $JD_COOKIE ]; then sed -i "/variables/a\      JD_COOKIE: $JD_COOKIE" serverless.yml; fi;
           if [ $JD_DEBUG ]; then sed -i "/variables/a\      JD_DEBUG: $JD_DEBUG" serverless.yml; fi;
           if [ $JD_USER_AGENT ]; then sed -i "/variables/a\      JD_USER_AGENT: $JD_USER_AGENT" serverless.yml; fi;
@@ -48,8 +48,8 @@ jobs:
           if [ $QQ_SKEY ]; then sed -i "/variables/a\      QQ_SKEY: $QQ_SKEY" serverless.yml; fi;
           if [ $QQ_MODE ]; then sed -i "/variables/a\      QQ_MODE: $QQ_MODE" serverless.yml; fi;
         env: #因为直接读取secrets里面的值很多字符不会自动转译，导致写入serverless.yml异常，所以设置到环境变量，在读取环境变量转译过的值
-          XMLY_SPEED_COOKIE: "${{ secrets.XMLY_SPEED_COOKIE }}"
           SCF_REGION: "${{ secrets.SCF_REGION }}"
+          XMLY_SPEED_COOKIE: "${{ secrets.XMLY_SPEED_COOKIE }}"
           JD_COOKIE: "${{ secrets.JD_COOKIE}}"
           JD_DEBUG: "${{ secrets.JD_DEBUG}}"
           JD_USER_AGENT: "${{ secrets.JD_USER_AGENT}}"
