@@ -1,0 +1,19 @@
+name: 执行脚本
+on:
+  workflow_dispatch:
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: "Set up Python"
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: "安装依赖包"
+        run: pip install -r ./requirements.txt
+      - name: "运行脚本"
+        run: python3 $CODE_NAME
+        env:
+          CODE_NAME: "${{ secrets.CODE_NAME}}"

@@ -1,0 +1,22 @@
+component: scf
+app: yangmaojb_py
+inputs:
+  name: yangmaojb_py
+  src: ./
+  description: yangmaojb
+  handler: index.main_handler
+  runtime: Python3.6
+  namespace: default
+  region: ap-hongkong 
+  memorySize: 64
+  timeout: 333
+  environment:
+    variables:
+      RUN_CONFIG: '{"xmly_speed":{"run":"true"}}'
+  events:
+    - timer:
+        parameters:
+          name: runcron
+          cronExpression: "0 23,53 * * * * *"	
+          enable: false
+          argument: cron
