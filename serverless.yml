@@ -1,5 +1,6 @@
 component: scf
 app: yangmaojb_py
+name: yangmaojb_py
 inputs:
   name: yangmaojb_py
   src: ./
