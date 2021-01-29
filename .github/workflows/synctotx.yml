@@ -16,7 +16,7 @@ jobs:
           python-version: 3.7
       - name: "安装依赖 serverless工具"
         run: |
-          curl -o- -L https://slss.io/install | bash
+          sudo curl -o- -L https://slss.io/install | bash
           serverless -v
           pip install -r ./requirements.txt
       - name: "运行下载代码脚本"
