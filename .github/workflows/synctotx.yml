@@ -14,8 +14,10 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.7
-      - name: "安装依赖包"
-        run: pip install -r ./requirements.txt
+      - name: "安装依赖 serverless工具"
+        run: |
+          curl -o- -L https://slss.io/install | bash
+          pip install -r ./requirements.txt
       - name: "运行下载代码脚本"
         run: |
           python3 dlcode.py
