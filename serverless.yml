@@ -10,7 +10,7 @@ inputs:
   namespace: default
   region: ap-hongkong 
   memorySize: 64
-  timeout: 333
+  timeout: 900
   environment:
     variables:
       RUN_CONFIG: '{"xmly_speed":{"run":"false"}}'
