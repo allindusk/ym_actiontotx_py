@@ -38,7 +38,6 @@ jobs:
         run: |
           echo "运行xmly_replconfig";python3 xmly_replconfig.py
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
-          if [ $XMLY_SPEED_COOKIE ]; then sed -i "/variables/a\      XMLY_SPEED_COOKIE: $XMLY_SPEED_COOKIE" serverless.yml; fi;
           if [ $JD_COOKIE ]; then sed -i "/variables/a\      JD_COOKIE: $JD_COOKIE" serverless.yml; fi;
           if [ $JD_DEBUG ]; then sed -i "/variables/a\      JD_DEBUG: $JD_DEBUG" serverless.yml; fi;
           if [ $JD_USER_AGENT ]; then sed -i "/variables/a\      JD_USER_AGENT: $JD_USER_AGENT" serverless.yml; fi;
