@@ -119,3 +119,6 @@ def run():
         # os.system('python3 ./'+'execute'+str(idx)+'.py')
     print("\n***************************\n文件全部替换并写入完毕")
     exit(0)
+
+if __name__=='__main__':
+  run()
