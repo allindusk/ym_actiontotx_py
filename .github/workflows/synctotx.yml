@@ -25,8 +25,6 @@ jobs:
           serverless -v;node -v;npm -v
       - name: "下载raw脚本"
         run: python3 dlcode.py
-      - name: "运行xmly_replconfig"
-        run: python3 xmly_replconfig.py
       # - name: commit-push code
       #   run: |
       #     git config user.name github-actions
@@ -36,10 +34,9 @@ jobs:
       #     if [[ "$git_status" != *"up to date"* ]];then git commit -m "sync code by action"&&git push;fi;
       #     rm -rf .git
       #     ls -a
-      - name: "查看目录情况"
-        run: ls -a;du -h --max-depth=1
-      - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
+      - name: "运行xmly_replconfig,替换severless.yml的env"
         run: |
+          echo "运行xmly_replconfig";python3 xmly_replconfig.py
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;
           if [ $JD_COOKIE ]; then sed -i "/variables/a\      JD_COOKIE: $JD_COOKIE" serverless.yml; fi;
           if [ $JD_DEBUG ]; then sed -i "/variables/a\      JD_DEBUG: $JD_DEBUG" serverless.yml; fi;
@@ -73,6 +70,8 @@ jobs:
           IGOT_PUSH_KEY: "${{ secrets.IGOT_PUSH_KEY}}"
           QQ_SKEY: "${{ secrets.QQ_SKEY}}"
           QQ_MODE: "${{ secrets.QQ_MODE}}"
+      - name: "查看目录情况"
+        run: ls -a;du -h --max-depth=1
       - name: "部署到腾讯云函数"
         run: serverless deploy
         env:
