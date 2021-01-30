@@ -115,7 +115,7 @@ def run():
             print("XMLY_ACCUMULATE_INDEX配置生效,为索引" +
                   str(idx)+"的数据执行了禁用当天刷新时长的操作")
         executeContent = smartNotify(executeContent)
-        writeFile(executeContent, 'execute'+str(idx)+'.py')
-        os.system('python3 ./'+'execute'+str(idx)+'.py')
-    print("\n***************************\n文件全部执行完毕")
+        writeFile(executeContent, 'xmly_speed'+str(idx)+'.py')
+        # os.system('python3 ./'+'execute'+str(idx)+'.py')
+    print("\n***************************\n文件全部替换并写入完毕")
     exit(0)

@@ -13,11 +13,17 @@ inputs:
   timeout: 333
   environment:
     variables:
-      RUN_CONFIG: '{"xmly_speed":{"run":"true"}}'
+      RUN_CONFIG: '{"xmly_speed":{"run":"false"}}'
   events:
     - timer:
         parameters:
-          name: runcron
-          cronExpression: "0 23,53 * * * * *"	
+          name: nocron
+          cronExpression: "0 03,33 * * * * *"	
           enable: false
-          argument: cron
+          argument: nocron?xmly_speed1&&xmly_speed2
+    - timer:
+        parameters:
+          name: nocrontest
+          cronExpression: "0 0/2 * * * * *"	
+          enable: false
+          argument: nocron?xmly_speed1&&xmly_speed2

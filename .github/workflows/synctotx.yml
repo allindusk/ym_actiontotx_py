@@ -20,13 +20,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: "安装依赖 serverless工具"
         run: |
+          pip install -r ./requirements.txt -t .
           sudo npm install serverless -g
           serverless -v;node -v;npm -v
-          pip install -r ./requirements.txt
-      - name: "运行下载代码脚本"
-        run: |
-          python3 dlcode.py
-          du -h --max-depth=1
+      - name: "下载raw脚本"
+        run: python3 dlcode.py
+      - name: "运行xmly_replconfig"
+        run: python3 xmly_replconfig.py
       # - name: commit-push code
       #   run: |
       #     git config user.name github-actions
@@ -36,6 +36,8 @@ jobs:
       #     if [[ "$git_status" != *"up to date"* ]];then git commit -m "sync code by action"&&git push;fi;
       #     rm -rf .git
       #     ls -a
+      - name: "查看目录情况"
+        run: ls -a;du -h --max-depth=1
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
           if [ $SCF_REGION ]; then sed -i "s/region:.*$/region: $SCF_REGION/g" serverless.yml; fi;

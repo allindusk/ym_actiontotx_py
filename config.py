@@ -8,20 +8,19 @@ RUN_CONFIG=json.loads(os.environ['RUN_CONFIG'])if "RUN_CONFIG" in os.environ els
 
 scriptobj_cron={
 #==============常驻=================
-  'xmly_speed':{#喜马拉雅极速版
+  # 'xmly_speed':{#喜马拉雅极速版   0 0,30 * * *
+  #   'url':'https://github.com/Zero-S1/xmly_speed/raw/master/xmly_speed.py',
+  #   'cron':{'m':'23','h':'00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23'},
+  #   'run':RUN_CONFIG['xmly_speed']['run'] if 'xmly_speed' in RUN_CONFIG else 'false'
+  # },
+}
+scriptobj_nocron={
+  'xmly_speed':{#喜马拉雅极速版   0 0,30 * * *
     'url':'https://github.com/Zero-S1/xmly_speed/raw/master/xmly_speed.py',
-    'cron':{'m':'23','h':'00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23'},
-    'run':RUN_CONFIG['xmly_speed']['run'] if 'xmly_speed' in RUN_CONFIG else 'true'
   },
 }
-# scriptobj_nocron={
-# #==============常驻=================
-#   'nocron':{#nocron
-#     'url':'https://github.com/nocron',
-#   },
-# }
 
-scriptobj = {**scriptobj_cron}
+scriptobj = {**scriptobj_cron,**scriptobj_nocron}
 
 def getallurl():
   urlarr=[]
@@ -29,7 +28,7 @@ def getallurl():
     urlarr.append(scriptobj[script]['url'])
   return urlarr
 
-def getscriptstr():
+def getcronscriptstr():
   scriptstr=''
   nowtime =datetime.now(tz=tz.gettz('Asia/Shanghai'))
   hour = str(nowtime.hour)
@@ -43,3 +42,4 @@ def getscriptstr():
   
   return scriptstr[0:len(scriptstr)-2]
 
+# print(getallurl())
